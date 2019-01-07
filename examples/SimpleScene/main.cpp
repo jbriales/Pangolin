@@ -2,6 +2,20 @@
 #include <pangolin/scene/axis.h>
 #include <pangolin/scene/scenehandler.h>
 
+void PlotDashedLine()
+{
+    glPushAttrib(GL_ENABLE_BIT);
+    // glPushAttrib is done to return everything to normal after drawing
+    // glLineStipple(4, 0xAAAA);
+    glLineStipple(2, 0x00FF);
+    glEnable(GL_LINE_STIPPLE);
+    glBegin(GL_LINES);
+    glVertex3f(-.5,.5,-.5);
+    glVertex3f(.5,.5,-.5);
+    glEnd();
+    glPopAttrib();
+}
+
 int main( int /*argc*/, char** /*argv*/ )
 {
     pangolin::CreateWindowAndBind("Main",640,480);
@@ -25,6 +39,8 @@ int main( int /*argc*/, char** /*argv*/ )
     d_cam.SetDrawFunction([&](pangolin::View& view){
         view.Activate(s_cam);
         tree.Render();
+
+        PlotDashedLine();
     });
 
     while( !pangolin::ShouldQuit() )
