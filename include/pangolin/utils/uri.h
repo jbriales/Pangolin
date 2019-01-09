@@ -46,4 +46,6 @@ public:
 PANGOLIN_EXPORT
 Uri ParseUri(const std::string& str_uri);
 
+std::ostream& operator<< (std::ostream &out, Uri &uri);
+
 }
